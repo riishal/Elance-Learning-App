@@ -15,10 +15,15 @@ class _ShortVideosState extends State<ShortVideos> {
   VideoPlayerController? videoPlayerController;
   Future<void>? initializeVideoPlayerFuture;
 
+  static List videoList = [
+    "assets/videos/elance-video.mp4",
+    "assets/videos/elance-video.mp4",
+    "assets/videos/elance-video.mp4"
+  ];
+
   @override
   void initState() {
-    initPlayer(
-        "https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4");
+    initPlayer(videoList.first);
 
     super.initState();
   }
@@ -29,36 +34,41 @@ class _ShortVideosState extends State<ShortVideos> {
     videoPlayerController?.dispose();
     chewieController?.dispose();
 
-    videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(url));
+    videoPlayerController = VideoPlayerController.asset(url);
     initializeVideoPlayerFuture =
         videoPlayerController?.initialize().then((value) {});
     chewieController = ChewieController(
-      videoPlayerController: videoPlayerController!,
-      autoInitialize: false,
-      autoPlay: true,
-      looping: true,
-    );
+        videoPlayerController: videoPlayerController!,
+        autoInitialize: false,
+        autoPlay: true,
+        fullScreenByDefault: true,
+        showControls: false,
+        looping: true,
+        aspectRatio: 16 / 25);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(elevation: 0, title: Text("Short Videos")),
-        body: ListView.separated(
-            itemBuilder: (context, index) => FutureBuilder(
-                  future: initializeVideoPlayerFuture,
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                    return Chewie(controller: chewieController!);
-                  },
-                ),
-            separatorBuilder: (context, index) => SizedBox(
-                  height: 10,
-                ),
-            itemCount: 4));
+        body: PageView.builder(
+            controller: PageController(initialPage: 0, viewportFraction: 1),
+            itemCount: 4,
+            scrollDirection: Axis.vertical,
+            itemBuilder: (context, index) => Stack(
+                  children: [
+                    Chewie(controller: chewieController!),
+                    GestureDetector(
+                      onTap: () {
+                        videoPlayerController?.play();
+                      },
+                      child: videoPlayerController!.value.isLooping
+                          ? Container()
+                          : Center(
+                              child: Icon(Icons.play_arrow),
+                            ),
+                    ),
+                  ],
+                )));
   }
 }
