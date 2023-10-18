@@ -1,9 +1,12 @@
+import 'package:elance_app/view/components/financial_card.dart';
 import 'package:elance_app/view/helpline.dart';
 import 'package:elance_app/view/short_videopage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import 'components/test_container.dart';
 
 int videoIndex = 0;
 
@@ -409,178 +412,18 @@ class _HomepageState extends State<Homepage> {
                     SizedBox(
                       height: 160,
                       child: PageView(controller: _pageController, children: [
-                        SizedBox(
-                          height: 160,
-                          width: double.infinity,
-                          child: Stack(children: [
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Container(
-                                  height: 147,
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                      image: const DecorationImage(
-                                          image: AssetImage(
-                                              "assets/image/container2.png")),
-                                      color: const Color.fromRGBO(
-                                          255, 230, 216, 1),
-                                      borderRadius: BorderRadius.circular(9)),
-                                  child: const Padding(
-                                      padding: EdgeInsets.only(left: 10),
-                                      child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                              height: 15,
-                                            ),
-                                            Text(
-                                              "ACCA Financial\nReporting",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w700,
-                                                  fontSize: 16,
-                                                  color: Color.fromRGBO(
-                                                      7, 42, 79, 1)),
-                                            ),
-                                            SizedBox(
-                                              height: 7,
-                                            ),
-                                            Text(
-                                              "by Gopika M, ACCA\nStarts Tomorrow at 10:30 AM",
-                                              style: TextStyle(
-                                                  fontStyle: FontStyle.italic,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 10,
-                                                  color: Color.fromRGBO(
-                                                      7, 42, 79, 1)),
-                                            ),
-                                            SizedBox(
-                                              height: 23,
-                                            ),
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  "Set Reminder",
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      fontSize: 10,
-                                                      color: Color.fromRGBO(
-                                                          12, 84, 160, 1)),
-                                                ),
-                                                SizedBox(
-                                                  width: 6,
-                                                ),
-                                                CircleAvatar(
-                                                    backgroundColor:
-                                                        Color.fromRGBO(
-                                                            12, 84, 160, 1),
-                                                    radius: 8,
-                                                    child: Icon(
-                                                      Icons
-                                                          .keyboard_arrow_right_outlined,
-                                                      color: Colors.white,
-                                                      size: 15,
-                                                    )),
-                                              ],
-                                            ),
-                                          ]))),
-                            ),
-                            Positioned(
-                                bottom: 0,
-                                right: 0,
-                                child: Image.asset(
-                                  "assets/image/Background 1.png",
-                                  scale: 1,
-                                ))
-                          ]),
+                        FinancialCard(
+                          color: const Color.fromRGBO(255, 230, 216, 1),
                         ),
-                        SizedBox(
-                          height: 160,
-                          width: double.infinity,
-                          child: Stack(children: [
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Container(
-                                  height: 147,
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                      image: const DecorationImage(
-                                          image: AssetImage(
-                                              "assets/image/container-line.png")),
-                                      color: const Color.fromRGBO(
-                                          12, 84, 160, 0.22),
-                                      borderRadius: BorderRadius.circular(9)),
-                                  child: const Padding(
-                                      padding: EdgeInsets.only(left: 10),
-                                      child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                              height: 15,
-                                            ),
-                                            Text(
-                                              "ACCA Financial\nReporting",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w700,
-                                                  fontSize: 16,
-                                                  color: Color.fromRGBO(
-                                                      7, 42, 79, 1)),
-                                            ),
-                                            SizedBox(
-                                              height: 7,
-                                            ),
-                                            Text(
-                                              "by Gopika M, ACCA\nStarts Tomorrow at 10:30 AM",
-                                              style: TextStyle(
-                                                  fontStyle: FontStyle.italic,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 10,
-                                                  color: Color.fromRGBO(
-                                                      7, 42, 79, 1)),
-                                            ),
-                                            SizedBox(
-                                              height: 23,
-                                            ),
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  "Set Reminder",
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      fontSize: 10,
-                                                      color: Color.fromRGBO(
-                                                          12, 84, 160, 1)),
-                                                ),
-                                                SizedBox(
-                                                  width: 6,
-                                                ),
-                                                CircleAvatar(
-                                                    backgroundColor:
-                                                        Color.fromRGBO(
-                                                            12, 84, 160, 1),
-                                                    radius: 8,
-                                                    child: Icon(
-                                                      Icons
-                                                          .keyboard_arrow_right_outlined,
-                                                      color: Colors.white,
-                                                      size: 15,
-                                                    )),
-                                              ],
-                                            ),
-                                          ]))),
-                            ),
-                            Positioned(
-                                bottom: 0,
-                                right: 0,
-                                child: Image.asset(
-                                  "assets/image/Background 1.png",
-                                  scale: 1,
-                                ))
-                          ]),
+                        FinancialCard(
+                          color: const Color.fromRGBO(12, 84, 160, 0.22),
                         ),
+                        FinancialCard(
+                          color: Color.fromARGB(56, 170, 235, 176),
+                        ),
+                        FinancialCard(
+                          color: Color.fromARGB(56, 161, 217, 234),
+                        )
                       ]),
                     ),
                     const SizedBox(
@@ -704,58 +547,7 @@ class _HomepageState extends State<Homepage> {
                               ),
                           itemCount: 2),
                     ),
-                    SizedBox(
-                      height: 160,
-                      width: double.infinity,
-                      child: Stack(children: [
-                        Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Container(
-                              height: 130,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                  image: const DecorationImage(
-                                      image: AssetImage(
-                                          "assets/image/container-line.png")),
-                                  color:
-                                      const Color.fromRGBO(12, 84, 160, 0.22),
-                                  borderRadius: BorderRadius.circular(9)),
-                              child: Padding(
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const SizedBox(
-                                          height: 7,
-                                        ),
-                                        Image.asset("assets/image/elance1.png"),
-                                        const SizedBox(
-                                          height: 5,
-                                        ),
-                                        const Text(
-                                          "Hello! Connect with us on our\n social media platforms to know\n more about us",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 9,
-                                              color:
-                                                  Color.fromRGBO(7, 42, 79, 1)),
-                                        ),
-                                        const SizedBox(
-                                          height: 15,
-                                        ),
-                                        Image.asset("assets/image/medias.png")
-                                      ]))),
-                        ),
-                        Positioned(
-                            bottom: 0,
-                            right: 0,
-                            child: Image.asset(
-                              "assets/image/footer-image.png",
-                              scale: 1,
-                            ))
-                      ]),
-                    ),
+                    TestContainer(),
                     const SizedBox(
                       height: 10,
                     )

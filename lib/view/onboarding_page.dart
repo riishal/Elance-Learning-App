@@ -50,9 +50,14 @@ class _OnboardPageState extends State<OnboardPage> {
                             )
                           : TextButton.icon(
                               onPressed: () {
-                                _pageController.nextPage(
-                                    duration: Duration(milliseconds: 500),
-                                    curve: Curves.easeInOut);
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Homepage(),
+                                    ));
+                                // _pageController.nextPage(
+                                //     duration: Duration(milliseconds: 500),
+                                //     curve: Curves.easeInOut);
                                 // _pageController.jumpToPage(2);
                               },
                               icon: Icon(

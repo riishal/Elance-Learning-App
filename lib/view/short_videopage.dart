@@ -11,21 +11,31 @@ class ShortVideos extends StatefulWidget {
 }
 
 class _ShortVideosState extends State<ShortVideos> {
+  late PageController _pageController = PageController();
   ChewieController? chewieController;
   VideoPlayerController? videoPlayerController;
   Future<void>? initializeVideoPlayerFuture;
 
   static List videoList = [
     "assets/videos/elance-video.mp4",
-    "assets/videos/elance-video.mp4",
+    "assets/videos/elance-video2.mp4",
+    "assets/videos/elance-video3.mp4",
+    "assets/videos/elance-video3.mp4",
     "assets/videos/elance-video.mp4"
   ];
 
   @override
   void initState() {
     initPlayer(videoList.first);
+    _pageController = PageController(initialPage: 0, viewportFraction: 1);
 
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
 
   initPlayer(
@@ -42,33 +52,43 @@ class _ShortVideosState extends State<ShortVideos> {
         autoInitialize: false,
         autoPlay: true,
         fullScreenByDefault: true,
-        showControls: false,
+        showControls: true,
         looping: true,
-        aspectRatio: 16 / 25);
+        aspectRatio: 20 / 29);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(elevation: 0, title: Text("Short Videos")),
-        body: PageView.builder(
-            controller: PageController(initialPage: 0, viewportFraction: 1),
-            itemCount: 4,
-            scrollDirection: Axis.vertical,
-            itemBuilder: (context, index) => Stack(
-                  children: [
-                    Chewie(controller: chewieController!),
-                    GestureDetector(
-                      onTap: () {
-                        videoPlayerController?.play();
-                      },
-                      child: videoPlayerController!.value.isLooping
-                          ? Container()
-                          : Center(
-                              child: Icon(Icons.play_arrow),
-                            ),
-                    ),
-                  ],
-                )));
+        backgroundColor: const Color.fromRGBO(12, 84, 160, 0.13),
+        appBar: AppBar(
+            backgroundColor: const Color.fromRGBO(12, 84, 160, 0.13),
+            elevation: 0,
+            title: Text("Short Videos")),
+        body: FutureBuilder(
+          future: initializeVideoPlayerFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const AspectRatio(
+                  aspectRatio: 16 / 25,
+                  child: Center(child: CircularProgressIndicator()));
+            }
+            return PageView.builder(
+              onPageChanged: (index) {
+                setState(() {
+                  initPlayer(videoList[index]);
+                });
+
+                // videoPlayerController!.play();
+              },
+              controller: _pageController,
+              itemCount: 5,
+              scrollDirection: Axis.vertical,
+              itemBuilder: (context, index) => Chewie(
+                controller: chewieController!,
+              ),
+            );
+          },
+        ));
   }
 }
