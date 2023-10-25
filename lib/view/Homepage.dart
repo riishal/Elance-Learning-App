@@ -1,12 +1,18 @@
+import 'package:elance_app/view/OTP-Login/mobile_number_login.dart';
 import 'package:elance_app/view/components/financial_card.dart';
-import 'package:elance_app/view/helpline.dart';
+import 'package:elance_app/view/components/offer__courses.dart';
+import 'package:elance_app/view/components/see_all_widget.dart';
+import 'package:elance_app/view/components/text_widget.dart';
+import 'package:elance_app/view/components/top_bar.dart';
+import 'package:elance_app/view/menudrawer/drawer_page.dart';
+import 'package:elance_app/view/HelpCenter/helpline.dart';
 import 'package:elance_app/view/short_videopage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import 'components/test_container.dart';
+import 'components/footer_widget.dart';
 
 int videoIndex = 0;
 
@@ -20,22 +26,7 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
-    late PageController _pageController = PageController();
-
-    @override
-    void initState() {
-      _pageController = PageController(
-        initialPage: 0,
-        viewportFraction: 0.96,
-      );
-      super.initState();
-    }
-
-    @override
-    void dispose() {
-      _pageController.dispose();
-      super.dispose();
-    }
+    late PageController pageController = PageController();
 
     List<String> procadsList = [
       "assets/image/Rectangle 27.png",
@@ -43,6 +34,7 @@ class _HomepageState extends State<Homepage> {
     ];
 
     return Scaffold(
+      drawer: DrawerPage(),
       backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       body: SafeArea(
           child: Container(
@@ -52,40 +44,29 @@ class _HomepageState extends State<Homepage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                Builder(builder: (context) {
+                  return GestureDetector(
+                      onTap: () {
+                        Scaffold.of(context).openDrawer();
+                      },
+                      child: const TopBarWidget(
+                        widget: Icon(
+                          Icons.menu,
+                          size: 20,
+                        ),
+                      ));
+                }),
                 GestureDetector(
-                  child: Container(
-                    height: 36,
-                    width: 39,
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                            color: const Color.fromRGBO(12, 84, 160, 0.13)),
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(5)),
-                    child: const Icon(
-                      Icons.menu,
-                      size: 20,
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const HelpLinepage(),
-                        ));
-                  },
-                  child: Container(
-                    height: 36,
-                    width: 39,
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                            color: const Color.fromRGBO(12, 84, 160, 0.13)),
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(5)),
-                    child: Image.asset("assets/image/appbar-icon.png"),
-                  ),
-                )
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HelpLinepage(),
+                          ));
+                    },
+                    child: TopBarWidget(
+                      widget: Image.asset("assets/image/appbar-icon.png"),
+                    ))
               ],
             ),
             Expanded(
@@ -96,12 +77,8 @@ class _HomepageState extends State<Homepage> {
                     const SizedBox(
                       height: 20,
                     ),
-                    const Text(
-                      "Whats New!",
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Color.fromRGBO(7, 42, 79, 1)),
+                    const TextWidget(
+                      text: "Whats New!",
                     ),
                     SizedBox(
                       height: 147,
@@ -189,126 +166,98 @@ class _HomepageState extends State<Homepage> {
                     const SizedBox(
                       height: 15,
                     ),
-                    const Text(
-                      "Courses We Offer",
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Color.fromRGBO(7, 42, 79, 1)),
+                    const TextWidget(
+                      text: "Courses We Offer",
                     ),
                     const SizedBox(
                       height: 20,
                     ),
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      Expanded(
-                        child: Container(
-                          height: 67,
-                          width: 170,
-                          decoration: BoxDecoration(
-                              color: const Color.fromRGBO(255, 230, 216, 1),
-                              borderRadius: BorderRadius.circular(8)),
-                          child: const Center(
-                              child: Text(
-                            "Professional\n\t\t\t\t Courses",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 14,
-                                color: Color.fromRGBO(7, 42, 79, 1)),
-                          )),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Expanded(
-                        child: Container(
-                          height: 67,
-                          width: 170,
-                          decoration: BoxDecoration(
-                              color: const Color.fromRGBO(216, 225, 255, 1),
-                              borderRadius: BorderRadius.circular(8)),
-                          child: Center(
-                              child: Image.asset("assets/image/Frame.png")),
-                        ),
-                      )
-                    ]),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      Expanded(
-                        child: Container(
-                          height: 67,
-                          width: 170,
-                          decoration: BoxDecoration(
-                              color: const Color.fromRGBO(255, 216, 237, 1),
-                              borderRadius: BorderRadius.circular(8)),
-                          child: Center(
-                              child: Image.asset("assets/image/fram1.png")),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Expanded(
-                        child: Container(
-                          height: 67,
-                          width: 170,
-                          decoration: BoxDecoration(
-                              color: const Color.fromRGBO(236, 216, 255, 1),
-                              borderRadius: BorderRadius.circular(8)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset("assets/image/Rectangle 3.png"),
-                              const SizedBox(
-                                width: 3,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MobileNumberLoginpage(),
+                            ));
+                      },
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Expanded(
+                                child: OfferCourseWidget(
+                              color: Color.fromRGBO(255, 230, 216, 1),
+                              widget: Center(
+                                child: TextWidget(
+                                  text: "Professional\n\t\t\t\t Courses",
+                                ),
                               ),
-                              const Text(
-                                "Plus",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 14,
-                                    color: Color.fromRGBO(7, 42, 79, 1)),
-                              )
-                            ],
-                          ),
-                        ),
-                      )
-                    ]),
+                            )),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            Expanded(
+                                child: OfferCourseWidget(
+                              color: const Color.fromRGBO(216, 225, 255, 1),
+                              widget: Center(
+                                  child: Image.asset("assets/image/Frame.png")),
+                            ))
+                          ]),
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
-                    const Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            "Short videos",
-                            style: TextStyle(
-                                color: Color.fromRGBO(7, 42, 79, 1),
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                        Text(
-                          "See all",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 12,
-                              color: Color.fromRGBO(12, 84, 160, 1)),
-                        ),
-                        SizedBox(
-                          width: 7,
-                        ),
-                        CircleAvatar(
-                            backgroundColor: Color.fromRGBO(12, 84, 160, 1),
-                            radius: 8,
-                            child: Icon(
-                              Icons.keyboard_arrow_right_outlined,
-                              color: Colors.white,
-                              size: 15,
-                            )),
-                      ],
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MobileNumberLoginpage(),
+                            ));
+                      },
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ///////
+                            Expanded(
+                              child: OfferCourseWidget(
+                                color: const Color.fromRGBO(255, 216, 237, 1),
+                                widget: Center(
+                                    child:
+                                        Image.asset("assets/image/fram1.png")),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            Expanded(
+                                child: OfferCourseWidget(
+                              color: const Color.fromRGBO(236, 216, 255, 1),
+                              widget: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset("assets/image/Rectangle 3.png"),
+                                  const SizedBox(
+                                    width: 3,
+                                  ),
+                                  const Text(
+                                    "Plus",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 14,
+                                        color: Color.fromRGBO(7, 42, 79, 1)),
+                                  )
+                                ],
+                              ),
+                            ))
+                          ]),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const SeeAllWidget(
+                      widget: TextWidget(
+                        text: "Short videos",
+                      ),
                     ),
                     const SizedBox(
                       height: 10,
@@ -377,15 +326,10 @@ class _HomepageState extends State<Homepage> {
                           width: 4,
                         ),
                         Expanded(
-                          flex: 1,
-                          child: Text(
-                            "Streaming Videos",
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                                color: Color.fromRGBO(12, 84, 160, 1)),
-                          ),
-                        ),
+                            flex: 1,
+                            child: TextWidget(
+                              text: "Streaming Videos",
+                            )),
                         Text(
                           "See all",
                           style: TextStyle(
@@ -411,12 +355,13 @@ class _HomepageState extends State<Homepage> {
                     ),
                     SizedBox(
                       height: 160,
-                      child: PageView(controller: _pageController, children: [
+                      child:
+                          PageView(controller: pageController, children: const [
                         FinancialCard(
-                          color: const Color.fromRGBO(255, 230, 216, 1),
+                          color: Color.fromRGBO(255, 230, 216, 1),
                         ),
                         FinancialCard(
-                          color: const Color.fromRGBO(12, 84, 160, 0.22),
+                          color: Color.fromRGBO(12, 84, 160, 0.22),
                         ),
                         FinancialCard(
                           color: Color.fromARGB(56, 170, 235, 176),
@@ -432,59 +377,24 @@ class _HomepageState extends State<Homepage> {
                     Align(
                       alignment: Alignment.center,
                       child: SmoothPageIndicator(
-                          controller: _pageController,
+                          controller: pageController,
                           count: 4,
-                          effect: WormEffect(
+                          effect: const WormEffect(
                             spacing: 15,
                             radius: 5,
                             dotWidth: 30,
                             dotHeight: 4,
                             dotColor: Color.fromARGB(255, 187, 199, 187),
                             activeDotColor: Color.fromRGBO(12, 84, 160, 1),
-                          )
-                          // const SlideEffect(
-                          // spacing: 15,
-                          // radius: 5,
-                          // dotWidth: 30,
-                          // dotHeight: 4,
-                          // dotColor: Color.fromARGB(255, 187, 199, 187),
-                          // activeDotColor: Color.fromRGBO(12, 84, 160, 1),
-                          // ),
-                          ),
+                          )),
                     ),
                     const SizedBox(
                       height: 10,
                     ),
-                    const Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            "Podcasts",
-                            style: TextStyle(
-                                color: Color.fromRGBO(7, 42, 79, 1),
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                        Text(
-                          "See all",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 12,
-                              color: Color.fromRGBO(12, 84, 160, 1)),
-                        ),
-                        SizedBox(
-                          width: 7,
-                        ),
-                        CircleAvatar(
-                            backgroundColor: Color.fromRGBO(12, 84, 160, 1),
-                            radius: 8,
-                            child: Icon(
-                              Icons.keyboard_arrow_right_outlined,
-                              color: Colors.white,
-                              size: 15,
-                            )),
-                      ],
+                    const SeeAllWidget(
+                      widget: TextWidget(
+                        text: "Podcasts",
+                      ),
                     ),
                     const SizedBox(
                       height: 10,
@@ -547,7 +457,7 @@ class _HomepageState extends State<Homepage> {
                               ),
                           itemCount: 2),
                     ),
-                    TestContainer(),
+                    const FooterWidget(),
                     const SizedBox(
                       height: 10,
                     )

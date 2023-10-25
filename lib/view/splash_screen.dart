@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:elance_app/view/Homepage.dart';
+import 'package:elance_app/view/onboarding_page.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -13,20 +13,15 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  String image = "assets/image/elance.png";
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 5), (() {
-      navigateToMainScreen();
-    }));
-  }
-
-  void navigateToMainScreen() {
-    Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => Homepage(),
-        ));
+    Future.delayed(Duration(seconds: 5), () {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => OnboardPage(),
+      ));
+    });
   }
 
   @override
@@ -34,9 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-          child: Center(
-        child: Image.asset("assets/image/elance.png"),
-      )),
+          child: Center(child: Image.asset("assets/image/elance.png"))),
     );
   }
 }

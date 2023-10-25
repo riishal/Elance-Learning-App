@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class TestContainer extends StatelessWidget {
-  const TestContainer({super.key});
+class FooterWidget extends StatelessWidget {
+  const FooterWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class TestContainer extends StatelessWidget {
                           height: 5,
                         ),
                         const Text(
-                          "Hello! Connect with us on our\n social media platforms to know\n more about us",
+                          "Hello! Connect with us on our\nsocial media platforms to know\nmore about us",
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 9,

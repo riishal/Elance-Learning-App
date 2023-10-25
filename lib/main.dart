@@ -1,8 +1,6 @@
-import 'package:elance_app/view/Homepage.dart';
-import 'package:elance_app/view/onboarding_page.dart';
+import 'package:elance_app/view/choose_option_page.dart';
 import 'package:elance_app/view/splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   // WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: "Montserrat",
       ),
-      home: Homepage(),
+      home: ChooseOptionPage(),
       debugShowCheckedModeBanner: false,
     );
   }

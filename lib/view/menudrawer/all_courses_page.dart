@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
 
-class HelpLinepage extends StatelessWidget {
-  const HelpLinepage({super.key});
+class AllCoursesPage extends StatelessWidget {
+  const AllCoursesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     List<String> helpNameList = [
-      "Raise an issue Ticket",
-      "Check Ticket Status",
-      "FAQ"
+      "Professional Courses",
+      "estox",
+      "Commerce Lab",
+      "Elance Plus"
     ];
 
-    List<String> helpImage = [
-      "assets/image/help-1.png",
-      "assets/image/help2.png",
-      "assets/image/help3.png"
-    ];
-    List<Color> colour = [
+    List<Color> circleColor = [
       Color.fromRGBO(255, 249, 234, 1),
       Color.fromRGBO(234, 255, 235, 1),
       Color.fromRGBO(222, 238, 255, 1),
+      Color.fromRGBO(243, 222, 255, 1)
+    ];
+    List<Color> imageColor = [
+      Color.fromRGBO(237, 186, 55, 1),
+      Color.fromRGBO(25, 167, 31, 1),
+      Color.fromRGBO(37, 111, 190, 1),
+      Color.fromRGBO(175, 66, 237, 1)
     ];
 
     return Scaffold(
@@ -27,7 +30,7 @@ class HelpLinepage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(255, 255, 255, 1),
         title: Text(
-          "Help Center",
+          "All Courses",
           style: TextStyle(
               color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
         ),
@@ -51,8 +54,9 @@ class HelpLinepage extends StatelessWidget {
             itemBuilder: (context, index) => Container(
                   child: ListTile(
                     leading: CircleAvatar(
-                      backgroundColor: colour[index],
-                      child: Image.asset(helpImage[index]),
+                      backgroundColor: circleColor[index],
+                      child: Image.asset("assets/image/cap.png",
+                          scale: 10, color: imageColor[index]),
                     ),
                     title: Text(
                       helpNameList[index],
@@ -68,14 +72,17 @@ class HelpLinepage extends StatelessWidget {
                     ),
                   ),
                   decoration: BoxDecoration(
-                      color: Color.fromRGBO(255, 255, 255, 1),
+                      boxShadow: [BoxShadow(color: Colors.grey)],
+                      color: Colors.white,
+
+                      // color: Color.fromRGBO(255, 255, 255, 1),
                       borderRadius: BorderRadius.circular(10)),
                   height: 70,
                 ),
             separatorBuilder: (context, index) => SizedBox(
                   height: 15,
                 ),
-            itemCount: 3),
+            itemCount: imageColor.length),
       ))),
     );
   }
